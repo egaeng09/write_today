@@ -12,6 +12,6 @@ db.sqlite3-journal
 media
 utils/
 langchain/
-secrets.json
+*.json
 *.txt
 *.yml
