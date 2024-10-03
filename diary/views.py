@@ -15,7 +15,8 @@ from drf_yasg import openapi
 from .models import Member, Friend, Diary, Result, Achievement, Collection, Alert, MemberInfo
 from .serializers import MemberSerializer, MemberDataSerializer, DiarySerializer, ResultSerializer, SignUpSerializer, FriendRequestSerializer, FriendAcceptSerializer, ChangePasswordSerializer, DiaryResultSerializer, DiaryListSerializer, CollectionSerializer, TitleSerializer, FriendInfoSerializer, AlertSerializer
 from .model_task import process_diary, process_modified_diary
-from .task import admin_check, superuser_check, validate_token, collect_achivement, check_depression
+from .task import collect_achivement, check_depression
+from .auth import admin_check, superuser_check, validate_token
 
 
 """ 임시 """   
