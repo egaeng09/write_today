@@ -6,7 +6,7 @@ from rest_framework.exceptions import ValidationError
 from django.http import Http404
 from django.http import JsonResponse
 from django.conf import settings
-from diary.views import validate_token
+from diary.task import validate_token
 
 
 class ImmediateResponseException(Exception):
