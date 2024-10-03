@@ -16,7 +16,7 @@ from transformers import XLNetTokenizer
 from kobert_tokenizer import KoBERTTokenizer
 from transformers import BertModel
 
-device = torch.device("cuda:0")
+device = torch.device("cpu:0")
 
 tokenizer = XLNetTokenizer.from_pretrained('skt/kobert-base-v1')
 bertmodel = BertModel.from_pretrained('skt/kobert-base-v1', return_dict=False)
@@ -108,8 +108,8 @@ def kobert_load_model():
     global model
     print("================= kobert_model 로드 중 =================")
     model = BERTClassifier(bertmodel, dr_rate=0.5).to(device)
-    model.load_state_dict(torch.load('/home/ubuntu/write_today-backend/write_today/models/koBERT_model_mulit_state_dict(0506).pt', map_location=torch.device('cuda:0')))
-    checkpoint = torch.load('/home/ubuntu/write_today-backend/write_today/models/koBERT_model_mulit_all(0506).tar', map_location=torch.device('cuda:0'))
+    model.load_state_dict(torch.load('/home/ubuntu/write_today-backend/write_today/models/koBERT_model_mulit_state_dict(0506).pt', map_location=torch.device('cpu:0')))
+    checkpoint = torch.load('/home/ubuntu/write_today-backend/write_today/models/koBERT_model_mulit_all(0506).tar', map_location=torch.device('cpu:0'))
     model.load_state_dict(checkpoint['model'])
     optimizer.load_state_dict(checkpoint['optimizer'])
     print("================== kobert_model 모델 로드 완료 ==================")
