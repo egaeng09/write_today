@@ -1,4 +1,5 @@
 from rest_framework.response import Response
+from .models import Member
 
 def admin_check(user):
     if not user.is_staff:

@@ -169,7 +169,7 @@ PHONENUMBER_DEFAULT_FORMAT = 'NATIONAL' # Serializer Field 설정(Defulat=E164)
 PHONENUMBER_DB_FORMAT = 'NATIONAL' # Model Field 설정(Defulat=E164)
 
 
-CELERY_BROKER_URL = 'amqp://myuser:mypassword@172.31.11.103:5672//'
+CELERY_BROKER_URL = 'amqp://myuser:mypassword@172.31.14.80:5672//'
 CELERY_RESULT_BACKEND = 'db+mysql://ossu:ossuonul124@ossu-rds.ct0oca8osysa.ap-northeast-2.rds.amazonaws.com/WRITETODAY'
 
 # CELERY_RESULT_BACKEND = 'django-db'
