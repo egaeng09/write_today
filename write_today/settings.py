@@ -112,6 +112,9 @@ DATABASES = {
         'PASSWORD': 'ossuonul124',
         'HOST': 'ossu-rds.ct0oca8osysa.ap-northeast-2.rds.amazonaws.com',
         'PORT': '3306',
+        'OPTIONS': {
+            'init_command' : "SET sql_mode='STRICT_TRANS_TABLES'",
+        }
     }
 }
 
