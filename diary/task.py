@@ -4,7 +4,6 @@ from chat.models import Match
 from .fcm_push import send_to_firebase_cloud_messaging
 from django.db.models import Count
 import random
-from chat.views import RoomListCreateView
 
     
 def collect_achivement(user, type):
@@ -56,6 +55,7 @@ def check_depression(request):
         }
 
         # RoomListCreateView를 통해 Room 생성 호출
+        from chat.views import RoomListCreateView
         view = RoomListCreateView.as_view({'post': 'create'})
 
         alert_name = "상담 대상자 추가"
