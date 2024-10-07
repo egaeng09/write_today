@@ -16,3 +16,4 @@ langchain/
 *.txt
 *.yml
 Dockerfile
+Dockerfile.env

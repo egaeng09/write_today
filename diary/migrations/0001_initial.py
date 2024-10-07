@@ -63,22 +63,6 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name="Statistic",
-            fields=[
-                (
-                    "id",
-                    models.BigAutoField(
-                        auto_created=True,
-                        primary_key=True,
-                        serialize=False,
-                        verbose_name="ID",
-                    ),
-                ),
-                ("start_date", models.DateField()),
-                ("end_date", models.DateField()),
-            ],
-        ),
-        migrations.CreateModel(
             name="Member",
             fields=[
                 (
@@ -313,14 +297,6 @@ class Migration(migrations.Migration):
                     "emotions",
                     models.ManyToManyField(
                         through="diary.MixedEmotion", to="diary.emotion"
-                    ),
-                ),
-                (
-                    "statistic",
-                    models.ForeignKey(
-                        on_delete=django.db.models.deletion.CASCADE,
-                        related_name="results",
-                        to="diary.statistic",
                     ),
                 ),
             ],
