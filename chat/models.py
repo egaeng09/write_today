@@ -1,7 +1,8 @@
 from django.db import models
-from diary.models import Member
+from django.apps import apps
 
 class Room(models.Model):
+    Member = apps.get_model('diary', 'Member')
     counselor = models.ForeignKey(Member, related_name='counselor_room', on_delete=models.CASCADE)
     client = models.ForeignKey(Member, related_name='client_room', on_delete=models.CASCADE)
     is_opened = models.BooleanField(default = False)
@@ -13,6 +14,7 @@ class Room(models.Model):
 
 
 class CounselorInfo(models.Model):
+    Member = apps.get_model('diary', 'Member')
     member = models.ForeignKey(Member, on_delete = models.CASCADE)
     propensity = models.BooleanField(default = False)
     summary = models.TextField(null = False)
@@ -37,6 +39,7 @@ class Chat(models.Model):
     
 
 class Match(models.Model):
+    Member = apps.get_model('diary', 'Member')
     counselor = models.ForeignKey(Member, related_name='counselor', on_delete=models.CASCADE)
     client = models.ForeignKey(Member, related_name='client', on_delete=models.CASCADE)
     # 우울감이 존재하는 사람과 상담사를 매칭
