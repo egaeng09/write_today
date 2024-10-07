@@ -1,12 +1,13 @@
 from rest_framework import generics, serializers, status
 from rest_framework.response import Response
-from .models import Room, Chat, Member, Member
+from .models import Room, Chat
 from .serializers import RoomSerializer, ChatSerializer
 from rest_framework.exceptions import ValidationError
 from django.http import Http404
 from django.http import JsonResponse
 from django.conf import settings
 from diary.auth import validate_token
+from diary.models import Member
 
 
 class ImmediateResponseException(Exception):
