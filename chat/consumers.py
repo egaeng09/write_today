@@ -1,6 +1,5 @@
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from channels.db import database_sync_to_async
-from diary.fcm_push import send_to_firebase_cloud_messaging
 
 class ChatConsumer(AsyncJsonWebsocketConsumer):
 
@@ -119,6 +118,8 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
     @database_sync_to_async
     def send_push_notification(self, sender_email, recipient_email, message):
         from .models import Member
+        from diary.fcm_push import send_to_firebase_cloud_messaging
+
         member = Member.objects.filter(email=recipient_email).first()
         opponent_name = Member.objects.filter(email=sender_email).first().name
 
