@@ -1,6 +1,5 @@
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from channels.db import database_sync_to_async
-from .models import Room, Chat, Member
 from diary.fcm_push import send_to_firebase_cloud_messaging
 
 class ChatConsumer(AsyncJsonWebsocketConsumer):
@@ -75,6 +74,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
      
     @database_sync_to_async
     def get_or_create_room(self, counselor, client):
+        from .models import Room
 
         room, created = Room.objects.get_or_create(
         	counselor=counselor,
@@ -84,6 +84,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
     @database_sync_to_async
     def save_message(self, room, sender, message):
+        from .models import Chat
         if not sender or not message:
             raise ValueError("발신자 이메일 및 메시지가 필요합니다.")
 
@@ -91,10 +92,12 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
     @database_sync_to_async
     def check_room_exists(self, room_id):
+        from .models import Room
         return Room.objects.filter(id=room_id).exists()
     
     @database_sync_to_async
     def check_sender_is_counselor(self, sender_email, opponent_email, role):
+        from .models import Member
         sender = Member.objects.filter(email=sender_email).first()
         opponent = Member.objects.filter(email=opponent_email).first()
 
@@ -115,6 +118,7 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
             
     @database_sync_to_async
     def send_push_notification(self, sender_email, recipient_email, message):
+        from .models import Member
         member = Member.objects.filter(email=recipient_email).first()
         opponent_name = Member.objects.filter(email=sender_email).first().name
 
