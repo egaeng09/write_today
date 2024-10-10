@@ -22,7 +22,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
 secret_file = os.path.join(BASE_DIR, 'secrets.json') # secrets.json 파일 위치를 명시
 
 with open(secret_file) as f:
@@ -40,7 +39,7 @@ SECRET_KEY = get_secret("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True # 개발 모드 / Fasle면 운영 모드
 
-ALLOWED_HOSTS = [ 'localhost', '127.0.0.1', '3.39.121.183', '*' ] # 운영 모드인 경우 반드시 서버 IP나 도메인 지정해야 함
+ALLOWED_HOSTS = [ 'localhost', '127.0.0.1', '3.39.121.183', '43.203.89.208', '*' ] # 운영 모드인 경우 반드시 서버 IP나 도메인 지정해야 함
 
 
 # Application definition
@@ -109,7 +108,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'WRITETODAY',
         'USER': 'ossu',
-        'PASSWORD': 'ossuonul124',
+        'PASSWORD': get_secret("DB_PW"),
         'HOST': 'ossu-rds.ct0oca8osysa.ap-northeast-2.rds.amazonaws.com',
         'PORT': '3306',
         'OPTIONS': {
@@ -172,8 +171,8 @@ PHONENUMBER_DEFAULT_FORMAT = 'NATIONAL' # Serializer Field 설정(Defulat=E164)
 PHONENUMBER_DB_FORMAT = 'NATIONAL' # Model Field 설정(Defulat=E164)
 
 
-CELERY_BROKER_URL = 'amqp://myuser:mypassword@172.31.14.80:5672//'
-CELERY_RESULT_BACKEND = 'db+mysql://ossu:ossuonul124@ossu-rds.ct0oca8osysa.ap-northeast-2.rds.amazonaws.com/WRITETODAY'
+CELERY_BROKER_URL = get_secret("CELERY_URL")
+CELERY_RESULT_BACKEND = get_secret("CELERY_RESULT")
 
 # CELERY_RESULT_BACKEND = 'django-db'
 CELERY_ACCEPT_CONTENT = ['application/json']
@@ -186,7 +185,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [(os.environ.get('REDIS_HOST', 'localhost'), 6379)],
+            "hosts": [(os.getenv('REDIS_HOST', 'redis'), 6379)],
         },
     },
 }
