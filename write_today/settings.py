@@ -163,6 +163,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',
     'http://localhost:8000',
+    'http://localhost:5500',
 ] # CORS 허용 URL
 
 AUTH_USER_MODEL = 'diary.Member'
